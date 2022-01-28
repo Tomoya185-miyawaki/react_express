@@ -1,0 +1,19 @@
+FROM node:17-alpine
+
+ARG NODE_ENV=development
+ENV NODE_ENV=${NODE_ENV}
+ENV LANG=C.UTF-8
+ENV TZ=Asia/Tokyo
+
+WORKDIR /usr/src/app/api
+
+COPY ./api/package*.json .
+RUN apk update && \
+    apk upgrade && \
+    apk add --no-cache \
+        git \
+        make
+
+RUN npm ci
+
+COPY ./api .

@@ -1,0 +1,54 @@
+version: '3'
+services:
+  api:
+    container_name: react_express_api
+    build:
+      context: .
+      dockerfile: ./infra/api/Dockerfile
+    volumes:
+      - ./api:/usr/src/app/api
+      - ./api/node_modules:/usr/src/app/api/node_modules
+    environment:
+      NODE_ENV: development
+      REACT_DOMAIN: http://localhost
+      EXPRESS_DOMAIN: http://localhost:3000
+    tty: true
+    working_dir: /usr/src/app/api
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    command: npm run dev
+  
+  front:
+    container_name: react_express_front
+    build:
+      context: .
+      dockerfile: ./infra/front/Dockerfile
+    volumes:
+      - ./front:/usr/src/app/front
+      - ./front/node_modules:/usr/src/app/front/node_modules
+    environment:
+      NODE_ENV: development
+      REACT_DOMAIN: http://localhost:3000/
+    tty: true
+    working_dir: /usr/src/app/front
+    ports:
+      - 80:80
+    command: npm run dev
+  
+  db:
+    image: mysql:8.0
+    container_name: react_express_db
+    volumes:
+      - ./infra/db/data:/var/lib/mysql
+      - ./infra/db/initdb.d:/docker-entrypoint-initdb.d
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=react_express
+      - MYSQL_USER=react_express
+      - MYSQL_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=root
+      - TZ=Asia/Tokyo
