@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Sample from './components/sample'
-import Login from './components/login'
+import Sample from './pages/sample'
+import Login from './pages/login'
 
 function App() {
   return (

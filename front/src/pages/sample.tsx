@@ -28,8 +28,7 @@ function Samples() {
     <>
       <h1>Sample List</h1>
       <ul>
-        {sampleList &&
-          sampleList.map((sample) => <li key={sample.id}>{`${sample.id}: ${sample.title}`}</li>)}
+        {sampleList && sampleList.map((sample) => <li key={sample.id}>{`${sample.id}: ${sample.title}`}</li>)}
       </ul>
     </>
   )
