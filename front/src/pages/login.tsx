@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { fetchJwt } from '../api/jwt'
-import { Sample } from '../interface/sample'
 
 function Login() {
   const storedJwt = localStorage.getItem('token')
