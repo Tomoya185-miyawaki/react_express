@@ -37,16 +37,17 @@
     "eslint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier --write 'src/**/*.{js,ts,json}'",
     "lint": "npm-run-all eslint check-types",
-    "lint:fix": "npm-run-all eslint:fix check-types format",
+    "lint:fix": "npm-run-all eslint:fix check-types format gadd",
     "lint-staged": "lint-staged",
+    "gadd": "git add .",
     "prepare": "cd .. && husky install api/.husky"
   },
   "keywords": [],
   "author": "Servithink",
   "license": "ISC",
   "lint-staged": {
-    "*.{js,ts}": "eslint --cache --fix",
-    "*.ts": "tsc --noEmit",
-    "*.{js,ts,json}": "prettier --write"
+    "src/**/*.{js,ts}": "eslint --cache --fix",
+    "src/**/*.ts": "tsc --noEmit",
+    "src/**/*.{js,ts,json}": "prettier --write"
   }
 }

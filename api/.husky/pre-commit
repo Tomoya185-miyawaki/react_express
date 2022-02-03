@@ -2,7 +2,7 @@
 . "$(dirname "$0")/_/husky.sh"
 
 echo "Express側開始"
-cd api && npm run lint-staged
+cd api && npm run lint:fix
 echo "Express側終了"
 echo "React側開始"
 cd ../front && npm run fix

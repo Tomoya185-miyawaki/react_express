@@ -3,13 +3,13 @@ import { fetchJwt } from '../api/jwt'
 
 function Login() {
   const storedJwt = localStorage.getItem('token')
-  const [jwt, setJwt] = useState<string | null>(storedJwt || null)
+  const [jwtToken, setJwtToken] = useState<string | null>(storedJwt || null)
 
   useEffect(() => {
     fetchJwt()
-      .then((token) => {
-        localStorage.setItem('token', token.data)
-        setJwt(token.data)
+      .then((jwt) => {
+        localStorage.setItem('token', jwt.data.token)
+        setJwtToken(jwt.data.token)
       })
       .catch((error) => {
         console.error(error)
@@ -19,9 +19,9 @@ function Login() {
   return (
     <>
       <h1>Login</h1>
-      {jwt && (
+      {jwtToken && (
         <pre>
-          <code>{jwt}</code>
+          <code>{jwtToken}</code>
         </pre>
       )}
     </>
