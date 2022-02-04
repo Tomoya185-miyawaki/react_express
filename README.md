@@ -22,7 +22,7 @@ $ docker-compose run api sh
 ```
 ### DB（MySQL）用のサーバ（コンテナ）にアクセスし、ローカル環境のデータベース選択
 ```
-$ cd api && docker-compose run db sh
-$ mysql -u root -p （パスワードを聞かれたら、「root」を入力）
-$ use one_on_one
+$ docker-compose run db sh
+$ mysql -u root -p
+$ use react_express
 ```
