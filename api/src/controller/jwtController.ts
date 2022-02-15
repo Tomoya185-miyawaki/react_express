@@ -1,11 +1,13 @@
 import express from 'express'
-import { registerAdminJwtToken } from '../middleware/jwt'
+import { generateJwtToken } from '@/model/jwt'
 
 const index = async (req: express.Request, res: express.Response) => {
-  const token = await registerAdminJwtToken()
-  res.json({
-    success: true,
-    token: token,
+  await generateJwtToken(req).then((token) => {
+    res.cookie('token', token, { httpOnly: true })
+    res.json({
+      success: true,
+      token: token,
+    })
   })
 }
 

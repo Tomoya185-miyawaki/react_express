@@ -1,5 +1,5 @@
 import express from 'express'
-import jwtController from '../controller/jwtController'
+import jwtController from '@/controller/jwtController'
 
 const router = express.Router()
 

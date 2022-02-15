@@ -1,21 +1,18 @@
 import prisma from '../repository/prisma'
+import bcrypt from 'bcrypt'
 
 async function main() {
-  const miyawaki = await prisma.admins.create({
+  const saltRounds = 10
+  const sampleAdminUser = await prisma.admins.create({
     data: {
-      name: '宮脇智也',
-      email: 'sample@example.com',
-      password: 'password',
+      name: 'admin',
+      email: 'admin@example.com',
+      password: await bcrypt.hash('password', saltRounds),
     },
   })
-  console.log({ miyawaki })
+  console.log(sampleAdminUser)
 }
 
-main()
-  .catch((e) => {
-    console.error(e)
-    process.exit(1)
-  })
-  .finally(async () => {
-    await prisma.$disconnect()
-  })
+main().finally(async () => {
+  await prisma.$disconnect()
+})

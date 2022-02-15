@@ -1,10 +1,10 @@
-import prisma from './prisma'
+import prisma from '@/repository/prisma'
 
-const findAdminById = (id: number) =>
+const findAdminByEmail = (email: string) =>
   prisma.admins.findUnique({
     where: {
-      id: id,
+      email: email,
     },
   })
 
-export { findAdminById }
+export { findAdminByEmail }
